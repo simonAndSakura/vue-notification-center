@@ -1,46 +1,45 @@
-# Vue Notify Center
+# Vue Notification Center
+English | [简体中文](./README.zh-CN.md)
 
-## 什么是Vue Notify Center
-一个vue的跨组件通知中心轻量插件，采用订阅/发布(Subscribe/Publish)模式设计。
-发布者发布带主题的通知，如果有订阅者订阅了该主题，则订阅者会收到该通知。
+## What's Vue Notification Center
+A lightweight vue cross-component communication plugin，designed with Subscribe/Publish mode。when Publisher post notifications with specific topic，subscribers will receive the notification if they subscribe this topic。
 
-请注意，通知中心是全局的单例。
+Note that, Notification Center is a global singleton
 
-## 下载
+## Download
 
-使用npm
+using npm
 ```shell
-$ npm i vue-notify-center -S
+$ npm i vue-notification-center -S
 ```
 
-## 安装
+## Install
 
-在`main.js`中:
+in `main.js`:
 ```js
 import Vue from 'vue'
-import vueNotification from 'vue-notification'
+import nc from 'vue-notification-center'
 
-Vue.use(vueNotification)
+Vue.use(nc)
 ```
 
-## 如何使用
-### 发布者:
+## How to use
+### Publisher:
 ```js
 // componentA.vue
 
 methods: {
     someMethod () {
-        let data = {msg: '需要传递的数据'}
+        let data = {msg: 'data to be transmitted'}
         this.$nc.publish('someTopic', data)
     }
 }
 ```
+fine, you just published a notification with topic `someTopic`,subscribers will receive the notification if they subscribe topic named 'someTopic'。
 
-你刚才发布了一个主题为`someTopic`的通知。如果有订阅者订阅了该主题，那么它将会收到对应的通知。
+the Notification Center will not broadcast the notification if this topic has no subscribers, it will silently fail.
 
-如果该主题没有订阅者，则会静默失败。
-
-### 订阅者:
+### Subscriber:
 
 ```js
 // componentB.vue
@@ -54,19 +53,19 @@ created () {
     this.$nc.subscribe('someTopic', this.onReceived)
 }
 ```
-你刚才为`componentB`组件订阅了主题为`someTopic`的通知。如果有人发布了该主题的通知，那么`componentB`组件会调用你传入的回调函数。
-### 如何取消订阅
-在订阅者组件实例销毁之前，所有已订阅的主题都会自动取消订阅，无需手动取消。之后的版本会加上手动取消订阅的方法
+`componentB` subscribed to the notification with topic `someTopic`.if someone published this notification, and then Notification Center will invoke the given callback
+
+### How to unsubscribe
+
+Before the subscriber component instance is destroyed, it will automatically unsubscribes all subscribed topics without having to manually cancel. 
+Subsequent versions will be added with a manual unsubscribe method.
 
 
 ## API
-api已经混入到所有vue实例上，你可以通过`this.$XXXX`的方式使用
+the api has been mixin to all vue instance,you can call them like `this.$XXXX`
 
-|名称|参数|说明|
+|name|parameter|description|
 |---|---|---|
-|$nc|Function()|返回当前全局通知中心已订阅的主题|
-|$nc.subscribe|Function(topic:String, callback:Function)|topic: 要订阅的主题名称.callback:回调函数|
-|$nc.publish|Function(topic:String, data:Object):()|topic: 要发布的主题名称.data:通知数据|
-
-## 反馈
-你可以在github提issue或者联系我simon@sayto.top
+|$nc|Function()|return current topics in Notification Center|
+|$nc.subscribe|Function(topic:String, callback:Function)|topic: topic name to subscribe.|
+|$nc.publish|Function(topic:String, data:Object):()|topic: topic name to publish.data: carrying data|

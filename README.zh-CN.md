@@ -1,4 +1,5 @@
 # Vue Notification Center
+[English](./README.md) | 简体中文 
 
 ## 什么是Vue Notification Center
 一个轻量的vue跨组件通信插件，采用订阅/发布(Subscribe/Publish)模式设计。
