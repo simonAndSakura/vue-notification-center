@@ -1,7 +1,7 @@
-# Vue Notify Center
+# Vue Notification Center
 
-## 什么是Vue Notify Center
-一个vue的跨组件通知中心轻量插件，采用订阅/发布(Subscribe/Publish)模式设计。
+## 什么是Vue Notification Center
+一个轻量的vue跨组件通信插件，采用订阅/发布(Subscribe/Publish)模式设计。
 发布者发布带主题的通知，如果有订阅者订阅了该主题，则订阅者会收到该通知。
 
 请注意，通知中心是全局的单例。
@@ -10,7 +10,7 @@
 
 使用npm
 ```shell
-$ npm i vue-notify-center -S
+$ npm i vue-notification-center -S
 ```
 
 ## 安装
@@ -18,9 +18,9 @@ $ npm i vue-notify-center -S
 在`main.js`中:
 ```js
 import Vue from 'vue'
-import vueNotification from 'vue-notification'
+import nc from 'vue-notification-center'
 
-Vue.use(vueNotification)
+Vue.use(nc)
 ```
 
 ## 如何使用
@@ -56,7 +56,7 @@ created () {
 ```
 你刚才为`componentB`组件订阅了主题为`someTopic`的通知。如果有人发布了该主题的通知，那么`componentB`组件会调用你传入的回调函数。
 ### 如何取消订阅
-在订阅者组件实例销毁之前，所有已订阅的主题都会自动取消订阅，无需手动取消。之后的版本会加上手动取消订阅的方法
+在订阅者组件实例销毁之前，该组件会自动取消订阅所有已订阅的主题，无需手动取消。之后的版本会加上手动取消订阅的方法
 
 
 ## API

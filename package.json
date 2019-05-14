@@ -1,10 +1,14 @@
 {
-  "name": "vue-notification",
+  "name": "vue-notification-center",
   "version": "1.0.0",
   "description": "a global notification center in Vue.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonAndSakura/vue-notification-center.git"
   },
   "keywords": [
     "vue",
@@ -12,7 +16,7 @@
     "center",
     "notifyCenter"
   ],
-  "author": "simon@sayto.top",
+  "author": "simonandsakura",
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.11"
