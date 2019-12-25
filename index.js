@@ -2,8 +2,9 @@ import _ from 'lodash'
 export default {
   install (Vue, options) {
     const noop = () => {};
-    const _generateTopic = (topic) => ({
-      name: topic,
+
+    const _generateTopic = (event) => ({
+      name: event,
       subscribers: []
     });
     Vue._notificationCenter = {
@@ -19,7 +20,7 @@ export default {
         let topics = Vue._notificationCenter._topics;
         return {topics};
       };
-      notificationCenter.subscribe = (topic, cb = noop) => {
+      notificationCenter.on = (topic, cb = noop) => {
         const vm = this;
         let oldSubscribe = vm._subscribe || [];
         if (oldSubscribe instanceof Array) {
@@ -36,7 +37,7 @@ export default {
           _topic.subscribers.push({vm, cb});
         }
       };
-      notificationCenter.publish = (topicName, data = {}) => {
+      notificationCenter.emit = (topicName, data = {}) => {
         const vm = this;
         const topics = Vue._notificationCenter._topics;
         const topic = _.find(topics, e => e.name === topicName);
